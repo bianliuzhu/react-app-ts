@@ -1,31 +1,29 @@
 /*
  * @Author: Gleason
  * @Date: 2021-09-14 16:18:32
- * @LastEditTime: 2021-09-26 11:01:23
- * @Description: 入口组件
+ * @LastEditTime: 2021-10-12 11:16:32
+ * @Description:
  */
-import logo from "./logo.svg";
-import "./App.css";
-
-function App() {
+import React from "react";
+import ReactDOM from "react-dom";
+import { BrowserRouter } from "react-router-dom";
+import { login } from "./api";
+export default function App() {
+  const loginHandle = async () => {
+    const res = await login();
+    console.log(res);
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      Hello React Router
+      <button onClick={loginHandle}>登录</button>
     </div>
   );
 }
 
-export default App;
+ReactDOM.render(
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>,
+  document.getElementById("root")
+);
