@@ -1,7 +1,7 @@
 /*
  * @Author: Gleason
  * @Date: 2021-09-26 16:33:25
- * @LastEditTime: 2021-10-12 11:12:43
+ * @LastEditTime: 2021-10-12 15:02:39
  * @Description: 环境域名文件
  */
 // 环境标识
@@ -9,7 +9,7 @@ const { REACT_APP_ENV } = process.env;
 
 // 开发环境
 const DEV = {
-  device: "//jstp-test-device.jd.com", //设备
+  device: "//poetry.apiopen.top", //设备
   service: "//jstp-test-product.jd.com", //服务
   order: "//jstp-test-order.jd.com", //订单
   ue: "//jstp-test-ue.jd.com", //ue接口服务
@@ -37,12 +37,12 @@ const domain = new Map([
   ["dev", DEV],
   ["test", TEST],
 ]);
+// console.log("window-----", window);
+// const pathname = window.location.pathname.split("/")[3] || "/";
 
-const pathname = window.location.pathname.split("/")[3] || "/";
+// const REACT_APP_URL =
+//   pathname === "/"
+//     ? domain.get(REACT_APP_ENV)["device"]
+//     : domain.get(REACT_APP_ENV)[pathname];
 
-const REACT_APP_URL =
-  pathname === "/"
-    ? domain.get(REACT_APP_ENV)["device"]
-    : domain.get(REACT_APP_ENV)[pathname];
-
-module.exports = REACT_APP_URL;
+module.exports = "//poetry.apiopen.top";
