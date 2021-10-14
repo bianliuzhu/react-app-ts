@@ -3,14 +3,13 @@
  * @Author: Gleason
  * @Date: 2021-04-14 11:52:20
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2021-10-13 18:27:57
+ * @LastEditTime: 2021-10-14 14:22:55
  */
 import axios from "axios";
 const domain = require("./Env");
 
 const {
   NODE_ENV, // 环境变量
-  REACT_APP_ENV, // 环境标识
 } = process.env;
 
 // 是否为生产模式
@@ -18,12 +17,12 @@ const IS_PROD = NODE_ENV === "production";
 
 // 路径名称
 const pathname = window.location.pathname.split("/")[3] || "/";
-console.log('pathname',pathname)
+
 // 开发环境: 代理标识
 const PROXY_SYMBOL = pathname === "/" ? 'device': pathname;
 
 // 生产环境: 正式域名
-const HOST_URL = pathname === "/" ? domain.get(REACT_APP_ENV)['device'] : domain.get(REACT_APP_ENV)[pathname];
+const HOST_URL = pathname === "/" ? domain['device'] : domain[pathname];
 
 // 基础URL
 const baseurl = IS_PROD ? HOST_URL : PROXY_SYMBOL;
