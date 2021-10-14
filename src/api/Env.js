@@ -1,11 +1,9 @@
 /*
  * @Author: Gleason
  * @Date: 2021-09-26 16:33:25
- * @LastEditTime: 2021-10-12 15:02:39
+ * @LastEditTime: 2021-10-13 18:28:58
  * @Description: 环境域名文件
  */
-// 环境标识
-const { REACT_APP_ENV } = process.env;
 
 // 开发环境
 const DEV = {
@@ -33,16 +31,7 @@ const TEST = {
   charge: "//jstp-m-test.jd.com/charge", // 京工巧匠小程序-收费线上化测试域名
 };
 
-const domain = new Map([
+module.exports = new Map([
   ["dev", DEV],
   ["test", TEST],
 ]);
-// console.log("window-----", window);
-// const pathname = window.location.pathname.split("/")[3] || "/";
-
-// const REACT_APP_URL =
-//   pathname === "/"
-//     ? domain.get(REACT_APP_ENV)["device"]
-//     : domain.get(REACT_APP_ENV)[pathname];
-
-module.exports = "//poetry.apiopen.top";

@@ -3,7 +3,7 @@
  * @Author: Gleason
  * @Date: 2021-04-13 16:56:39
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2021-09-27 14:09:37
+ * @LastEditTime: 2021-10-13 15:16:16
  */
 import Dio from "./axios";
 import QueryString from "qs";
@@ -59,6 +59,7 @@ class Request {
         })
           .then((res: Resonse) => {
             Toast.hide();
+            if (!res) return
             CodeHandle(res.data);
             resolve(allData ? res : res.data.data);
           })

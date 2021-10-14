@@ -1,7 +1,7 @@
 /*
  * @Author: Gleason
  * @Date: 2021-09-24 11:32:44
- * @LastEditTime: 2021-10-12 15:30:42
+ * @LastEditTime: 2021-10-13 17:57:04
  * @Description: webpack 配置(覆盖)
  */
 
@@ -16,11 +16,13 @@ function pathResolve(pathUrl) {
   return path.join(__dirname, pathUrl);
 }
 
-// const REACT_APP_URL = require("./src/api/Env");
+const domain = require("./src/api/Env");
 
-// const {
-//   REACT_APP_ENV, // 环境标识
-// } = process.env;
+const {
+  REACT_APP_ENV, // 环境标识
+} = process.env;
+
+const HOST = domain.get(REACT_APP_ENV);
 
 // override
 module.exports = {
@@ -55,21 +57,94 @@ module.exports = {
   jest: (config) => {
     return config;
   },
-
-  // devServer: (configFunction) => (proxy, allowedHost) => {
-  //   proxy = {
-  //     [REACT_APP_ENV]: {
-  //       secure: false, // 使用的是 http 协议则设置为false，https 协议则设置为 true
-  //       ws: false, // 是否启用websockets
-  //       target: REACT_APP_URL, // 代理目标
-  //       changeOrigin: true, // 覆盖主机头来源
-  //       pathRewrite: {
-  //         [`^/${REACT_APP_ENV}`]: "",
-  //       },
-  //     },
-  //   };
-  //   return configFunction(proxy, allowedHost);
-  // },
+  // worker
+  // charge
+  devServer: (configFunction) => (proxy, allowedHost) => {
+    proxy = {
+      "/device": {
+        secure: false, // 使用的是 http 协议则设置为false，https 协议则设置为 true
+        ws: false, // 是否启用websockets
+        target: HOST.device, // 代理目标
+        changeOrigin: true, // 覆盖主机头来源
+        pathRewrite: {
+          "^/device": "",
+        },
+      },
+      "/service": {
+        secure: false, // 使用的是 http 协议则设置为false，https 协议则设置为 true
+        ws: false, // 是否启用websockets
+        target: HOST.service, // 代理目标
+        changeOrigin: true, // 覆盖主机头来源
+        pathRewrite: {
+          "^/service": "",
+        },
+      },
+      "/order": {
+        secure: false, // 使用的是 http 协议则设置为false，https 协议则设置为 true
+        ws: false, // 是否启用websockets
+        target: HOST.order, // 代理目标
+        changeOrigin: true, // 覆盖主机头来源
+        pathRewrite: {
+          "^/service": "",
+        },
+      },
+      "/ue": {
+        secure: false, // 使用的是 http 协议则设置为false，https 协议则设置为 true
+        ws: false, // 是否启用websockets
+        target: HOST.ue, // 代理目标
+        changeOrigin: true, // 覆盖主机头来源
+        pathRewrite: {
+          "^/ue": "",
+        },
+      },
+      "/oldfornewservice": {
+        secure: false, // 使用的是 http 协议则设置为false，https 协议则设置为 true
+        ws: false, // 是否启用websockets
+        target: HOST.oldfornewservice, // 代理目标
+        changeOrigin: true, // 覆盖主机头来源
+        pathRewrite: {
+          "^/oldfornewservice": "",
+        },
+      },
+      "/quickorder": {
+        secure: false, // 使用的是 http 协议则设置为false，https 协议则设置为 true
+        ws: false, // 是否启用websockets
+        target: HOST.quickorder, // 代理目标
+        changeOrigin: true, // 覆盖主机头来源
+        pathRewrite: {
+          "^/quickorder": "",
+        },
+      },
+      "/quickorderQ2": {
+        secure: false, // 使用的是 http 协议则设置为false，https 协议则设置为 true
+        ws: false, // 是否启用websockets
+        target: HOST.quickorderQ2, // 代理目标
+        changeOrigin: true, // 覆盖主机头来源
+        pathRewrite: {
+          "^/quickorderQ2": "",
+        },
+      },
+      "/worker": {
+        secure: false, // 使用的是 http 协议则设置为false，https 协议则设置为 true
+        ws: false, // 是否启用websockets
+        target: HOST.worker, // 代理目标
+        changeOrigin: true, // 覆盖主机头来源
+        pathRewrite: {
+          "^/worker": "",
+        },
+      },
+      "/charge": {
+        secure: false, // 使用的是 http 协议则设置为false，https 协议则设置为 true
+        ws: false, // 是否启用websockets
+        target: HOST.charge, // 代理目标
+        changeOrigin: true, // 覆盖主机头来源
+        pathRewrite: {
+          "^/charge": "",
+        },
+      },
+    };
+    return configFunction(proxy, allowedHost);
+  },
 
   paths: (paths, env) => {
     return paths;

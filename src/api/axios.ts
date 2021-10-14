@@ -3,11 +3,10 @@
  * @Author: Gleason
  * @Date: 2021-04-14 11:52:20
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2021-10-12 11:04:53
+ * @LastEditTime: 2021-10-13 18:27:57
  */
 import axios from "axios";
-
-const REACT_APP_URL = require("./Env");
+const domain = require("./Env");
 
 const {
   NODE_ENV, // 环境变量
@@ -17,10 +16,19 @@ const {
 // 是否为生产模式
 const IS_PROD = NODE_ENV === "production";
 
-// 构造 REACT_APP_URL
+// 路径名称
+const pathname = window.location.pathname.split("/")[3] || "/";
+console.log('pathname',pathname)
+// 开发环境: 代理标识
+const PROXY_SYMBOL = pathname === "/" ? 'device': pathname;
 
-const baseurl = IS_PROD ? REACT_APP_URL : REACT_APP_ENV;
-console.log("baseurl", baseurl);
+// 生产环境: 正式域名
+const HOST_URL = pathname === "/" ? domain.get(REACT_APP_ENV)['device'] : domain.get(REACT_APP_ENV)[pathname];
+
+// 基础URL
+const baseurl = IS_PROD ? HOST_URL : PROXY_SYMBOL;
+
+
 // 创建一个独立的axios实例
 const Dio: any = axios.create({
   // 设置baseUr地址,如果通过proxy跨域可直接填写base地址
