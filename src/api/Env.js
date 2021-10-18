@@ -1,7 +1,7 @@
 /*
  * @Author: Gleason
  * @Date: 2021-09-26 16:33:25
- * @LastEditTime: 2021-10-14 14:25:57
+ * @LastEditTime: 2021-10-18 10:02:14
  * @Description: 环境域名文件
  */
 const {
@@ -40,4 +40,4 @@ const DomainMap = new Map([
 	["test", TEST],
 ]);
 
-module.exports = DomainMap.get(REACT_APP_ENV);
+module.exports = DomainMap;
