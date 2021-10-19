@@ -1,7 +1,7 @@
 /*
  * @Author: Gleason
  * @Date: 2021-09-24 11:32:44
- * @LastEditTime: 2021-10-18 10:39:37
+ * @LastEditTime: 2021-10-19 14:42:13
  * @Description: webpack 配置(覆盖)
  */
 
@@ -11,7 +11,11 @@ const {
 	addWebpackAlias, // 别名配置
 	addLessLoader, // less loader
 	fixBabelImports, // babel 导入 引入antd-mobile
+	addWebpackPlugin, // 增加插件
 } = require("customize-cra");
+
+// mock 插件
+const MockjsWebpackPlugin = require("mockplugin");
 
 const {
 	HOST_DEVICE, // 设备
@@ -23,16 +27,35 @@ const {
 	HOST_QUICKORDERQ2, // 一键下单二期
 	HOST_WORKER, // 工人认证
 	HOST_CHARGE, // 京工巧匠小程序-收费线上化
+	REACT_APP_ENV, // 环境标识
+	REACT_APP_MOCK_PORT, // mock服务 端口号
+	REACT_APP_MOCK_DATA_FOLDER, // mock 数据文件夹
 } = process.env;
 
-function pathResolve(pathUrl) {
-	return path.join(__dirname, pathUrl);
-}
+console.log(REACT_APP_MOCK_DATA_FOLDER, REACT_APP_MOCK_PORT);
 
-// const HOST = require("./src/api/Env");
-// let temp = HOST.get(REACT_APP_ENV);
-// console.log(temp);
-// console.log("http:" + HOST.get(REACT_APP_ENV));
+/**
+ * @description: 路径 处理
+ * @param {String} pathUrl
+ * @return {String} path
+ */
+const pathResolve = (pathUrl) => path.join(__dirname, pathUrl);
+
+/**
+ * @description: webpack 插件处理
+ * @param {*}
+ * @return {Function}
+ */
+const PluginHandle = () => {
+	// mock 环境下挂在 MockjsWebpackPlugin
+	if (REACT_APP_ENV === "mock") {
+		return new MockjsWebpackPlugin({
+			path: path.join(__dirname, REACT_APP_MOCK_DATA_FOLDER),
+			port: Number(REACT_APP_MOCK_PORT),
+		});
+	}
+	return () => {};
+};
 
 // override
 module.exports = {
@@ -59,6 +82,7 @@ module.exports = {
 			libraryName: "antd-mobile",
 			style: "css",
 		}),
+		addWebpackPlugin(PluginHandle()),
 		(config) => {
 			return config;
 		}
@@ -67,8 +91,6 @@ module.exports = {
 	jest: (config) => {
 		return config;
 	},
-	// worker
-	// charge
 	devServer: (configFunction) => (proxy, allowedHost) => {
 		proxy = {
 			"/device": {
@@ -161,10 +183,18 @@ module.exports = {
 					"^/charge": "",
 				},
 			},
+			[`/${REACT_APP_ENV}`]: {
+				secure: false,
+				ws: false,
+				target: `http://localhost:${REACT_APP_MOCK_PORT}`,
+				changeOrigin: true,
+				pathRewrite: {
+					[`^/${REACT_APP_ENV}`]: "",
+				},
+			},
 		};
 		return configFunction(proxy, allowedHost);
 	},
-
 	paths: (paths, env) => {
 		return paths;
 	},

@@ -3,7 +3,7 @@
  * @Author: Gleason
  * @Date: 2021-04-14 11:52:20
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2021-10-18 10:42:32
+ * @LastEditTime: 2021-10-19 14:52:59
  */
 import axios from "axios";
 // const domain = require("./Env");
@@ -19,6 +19,7 @@ const {
 	HOST_QUICKORDERQ2, // 一键下单二期
 	HOST_WORKER, // 工人认证
 	HOST_CHARGE, // 京工巧匠小程序-收费线上化
+  REACT_APP_ENV, // 环境标识
 } = process.env;
 
 // 域名 映射关系
@@ -33,15 +34,16 @@ const HostMap = new Map([
 	["worker", HOST_WORKER],// 工人认证
 	["charge", HOST_CHARGE],// 京工巧匠小程序-收费线上化
 ]);
-
+const IS_MOCK = REACT_APP_ENV==='mock'
 // 是否为生产模式
 const IS_PROD = NODE_ENV === "production";
 
 // 路径名称
 const pathname = window.location.pathname.split("/")[3] || "/";
+const DEFAULT_SYMBOL = pathname === "/" ? 'device': pathname;
 
 // 开发环境: 代理标识
-const PROXY_SYMBOL = pathname === "/" ? 'device': pathname;
+const PROXY_SYMBOL = IS_MOCK ? REACT_APP_ENV : DEFAULT_SYMBOL
 
 // 生产环境: 正式域名
 const HOST_URL = pathname === "/" ? HostMap.get('device') : HostMap.get(pathname);
