@@ -3,23 +3,17 @@
  * @Author: Gleason
  * @Date: 2021-04-14 11:52:20
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2021-10-19 14:52:59
+ * @LastEditTime: 2021-10-20 18:20:39
  */
 import axios from "axios";
-// const domain = require("./Env");
 
 const {
   NODE_ENV, // 环境变量
-	HOST_DEVICE, // 设备
-	HOST_SERVICE, // 服务
-	HOST_ORDER, // 订单
-	HOST_UE, // UE
-	HOST_OLDFORNEWSERVICE, // 以旧换新
-	HOST_QUICKORDER, // 一键下单
-	HOST_QUICKORDERQ2, // 一键下单二期
-	HOST_WORKER, // 工人认证
-	HOST_CHARGE, // 京工巧匠小程序-收费线上化
   REACT_APP_ENV, // 环境标识
+  HOST_DEVICE,
+  HOST_SERVICE,
+  HOST_ORDER,
+  HOST_WORKER
 } = process.env;
 
 // 域名 映射关系
@@ -27,14 +21,12 @@ const HostMap = new Map([
 	["device", HOST_DEVICE],// 设备
 	["service", HOST_SERVICE],// 服务
 	["order", HOST_ORDER],// 订单
-	["ue", HOST_UE],// UE
-	["oldfornewservice", HOST_OLDFORNEWSERVICE],// 以旧换新
-	["quickorder", HOST_QUICKORDER],// 一键下单
-	["quickorderQ2", HOST_QUICKORDERQ2],// 一键下单二期
 	["worker", HOST_WORKER],// 工人认证
-	["charge", HOST_CHARGE],// 京工巧匠小程序-收费线上化
 ]);
+
+// 是否为 mock 环境
 const IS_MOCK = REACT_APP_ENV==='mock'
+
 // 是否为生产模式
 const IS_PROD = NODE_ENV === "production";
 
