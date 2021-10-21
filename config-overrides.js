@@ -21,7 +21,7 @@ const {
 	HOST_DEVICE, // 设备
 	HOST_SERVICE, // 服务
 	HOST_ORDER, // 订单
-	HOST_WORKER, // 工人认证
+	HOST_WORKER, // 工作台
 	REACT_APP_ENV, // 环境标识
 	REACT_APP_MOCK_PORT, // mock服务 端口号
 	REACT_APP_MOCK_DATA_FOLDER, // mock 数据文件夹
