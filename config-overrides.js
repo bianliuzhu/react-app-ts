@@ -1,7 +1,7 @@
 /*
  * @Author: Gleason
  * @Date: 2021-09-24 11:32:44
- * @LastEditTime: 2021-10-21 09:52:57
+ * @LastEditTime: 2021-10-21 09:54:08
  * @Description: webpack 配置(覆盖)
  */
 
@@ -22,7 +22,6 @@ const {
 	HOST_SERVICE, // 服务
 	HOST_ORDER, // 订单
 	HOST_WORKER, // 工人认证
-	HOST_CHARGE, // 京工巧匠小程序-收费线上化
 	REACT_APP_ENV, // 环境标识
 	REACT_APP_MOCK_PORT, // mock服务 端口号
 	REACT_APP_MOCK_DATA_FOLDER, // mock 数据文件夹
