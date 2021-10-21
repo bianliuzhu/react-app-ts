@@ -1,26 +1,26 @@
 /**
- * @content: 一键下单二期: 故障服务
+ * @content: 测试mock数据
  * @url /getTime
  * @method post
- * @prams {string} areas 地址
- * @prams {string} hitchId 故障id
- * @prams {string} ruleId 查询关键字
+ * @prams {string} filed1 入参1
+ * @prams {string} filed2 入参2
+ * @prams {string} filed3 入参3
  */
  {
-	"code": 861,
-	"msg": "查询结果为空",
+	"code": 200,
+	"msg": "陈公公",
 	"data": {
-		"adwords": ["广告词语", "广告词语", "广告词语"], // 故障服务广告词
-		"list|2-5": [ // 故障服务列表 业务逻辑与一期一致参考一期
+		"aaa": ["string1", "string2", "string3"],
+		"list|2-5": [
 		  {
-		    "adWords": "@ctitle",
+		    "title": "@ctitle",
 		    "agree": false,
 		    "price|100-1000.2": 100.12,
-		    "productImg": "jfs/t1/133329/30/6245/156510/5f2ba4d8E645b995b/6b70c1f9119cc034.jpg",
-		    "productName": "@ctitle",
-		    "productsku": "@id",
-		    "selfPop|0-1": 0,
-		    "underlinePrice|100-1000.2": 51.00
+		    "image": "@image",
+		    "name": "@ctitle",
+		    "skuid": "@id",
+		    "sort|0-1": 0,
+		    "cccc|100-1000.2": 51.00
 		  }
 		]
 	}
