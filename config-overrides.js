@@ -1,7 +1,7 @@
 /*
  * @Author: Gleason
  * @Date: 2021-09-24 11:32:44
- * @LastEditTime: 2021-10-21 09:54:08
+ * @LastEditTime: 2021-10-21 17:38:51
  * @Description: webpack 配置(覆盖)
  */
 
@@ -57,15 +57,9 @@ module.exports = {
 	webpack: override(
 		addWebpackAlias({
 			"@": pathResolve("./src"),
-			assets: pathResolve("./src/assets"),
-			components: pathResolve("./src/components"),
-			utils: pathResolve("./src/utils"),
-			layout: pathResolve("./src/layout"),
-			pages: pathResolve("./src/pages"),
-			style: pathResolve("./src/assets/style"),
-			reducer: pathResolve("./src/reducer"),
+			api: pathResolve("./src/api"),
 			store: pathResolve("./src/store"),
-			action: pathResolve("./src/action"),
+			page: pathResolve("./src/page"),
 		}),
 		addLessLoader({
 			lessOptions: {
