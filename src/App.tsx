@@ -1,39 +1,40 @@
 /*
  * @Author: Gleason
  * @Date: 2021-09-14 16:18:32
- * @LastEditTime: 2021-10-12 14:51:55
+ * @LastEditTime: 2021-10-29 14:30:40
  * @Description:
  */
-import React from "react";
-import ReactDOM from "react-dom";
-import { BrowserRouter } from "react-router-dom";
-import { login } from "./api";
+
+import { login, vote } from "api";
+
 export default function App() {
-  const loginHandle = async () => {
-    const res = await login();
-    console.log(res);
-  };
-  const handle_click = () => {
-    fetch("/dev/org/all", { method: "GET" }).then(function (res) {
-      console.log("res", res);
+	// const aaa = useSelector((state: any) => state.counter);
 
-      // res.json().then(function (data) {
-      //   console.log("data", data);
-      // });
-    });
-  };
-  return (
-    <div>
-      Hello React Router
-      <button onClick={loginHandle}>登录</button>
-      <button onClick={handle_click}>测试</button>
-    </div>
-  );
+	const loginHandle = async () => {
+		const res = await login({
+			code: "079S6nFa1nz31C0gEjHa11Q6A40S6nFx",
+			"user-info": JSON.stringify({
+				nickName: "卞刘著",
+				gender: 0,
+				language: "zh_CN",
+				city: "",
+				province: "",
+				country: "",
+				avatarUrl:
+					"https://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTKd0LPDu217v67zib3C8HZCS79YqnE7phVic73mwYvlpiazwsLS3rdxgCsqalfy3Uaicia8CNu2GJeWDVg/132",
+			}),
+		});
+		console.log(res);
+	};
+	const voteHandle = async () => {
+		const res = await vote({ type: 1, sign_id: 314848 });
+		console.log(res);
+	};
+
+	return (
+		<div>
+			<button onClick={loginHandle}>登录</button>
+			<button onClick={voteHandle}>投票</button>
+		</div>
+	);
 }
-
-ReactDOM.render(
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>,
-  document.getElementById("root")
-);

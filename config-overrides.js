@@ -27,8 +27,6 @@ const {
 	REACT_APP_MOCK_DATA_FOLDER, // mock 数据文件夹
 } = process.env;
 
-console.log(REACT_APP_MOCK_DATA_FOLDER, REACT_APP_MOCK_PORT);
-
 /**
  * @description: 路径 处理
  * @param {String} pathUrl
@@ -86,7 +84,7 @@ module.exports = {
 				secure: false, // 使用的是 http 协议则设置为false，https 协议则设置为 true
 				ws: false, // 是否启用websockets
 				// target: "http:" + HOST.device, // 代理目标
-				target: "http:" + HOST_DEVICE, // 代理目标
+				target: "https:" + HOST_DEVICE, // 代理目标
 				changeOrigin: true, // 覆盖主机头来源
 				pathRewrite: {
 					"^/device": "",

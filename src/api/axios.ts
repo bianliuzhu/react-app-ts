@@ -3,7 +3,7 @@
  * @Author: Gleason
  * @Date: 2021-04-14 11:52:20
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2021-10-21 15:14:08
+ * @LastEditTime: 2021-10-29 14:17:11
  */
 import axios from "axios";
 
@@ -51,7 +51,7 @@ const Dio: any = axios.create({
 
 	// 定义统一的请求头部
 	headers: {
-		"Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
+		"Content-Type": "application/x-www-form-urlencoded",
 		// 'Content-Type': 'application/json'
 	},
 
@@ -78,7 +78,8 @@ Dio.interceptors.request.use(
 	(config: any) => {
 		// 自定义 header，可添加项目 token
 		// eslint-disable-next-line no-param-reassign
-		config.headers.token = "token";
+		config.headers.Authorization = sessionStorage.getItem("Authorization");
+
 		return config;
 	},
 	(error: any) => {
@@ -89,6 +90,8 @@ Dio.interceptors.request.use(
 // 响应拦截
 Dio.interceptors.response.use(
 	(response: any) => {
+		console.log(response.headers.Authorization);
+		sessionStorage.setItem("Authorization", response.headers.Authorization);
 		return response;
 	},
 	(error: any) => {
