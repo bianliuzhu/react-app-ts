@@ -1,18 +1,18 @@
 /*
  * @Author: your name
  * @Date: 2021-09-14 16:18:35
- * @LastEditTime: 2021-10-21 17:10:20
+ * @LastEditTime: 2021-11-01 10:41:44
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \react-app-ts\src\index.tsx
  */
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
 import { store } from "store";
+import "./index.css";
 ReactDOM.render(
 	<React.StrictMode>
 		<Provider store={store}>

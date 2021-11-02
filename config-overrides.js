@@ -1,7 +1,7 @@
 /*
  * @Author: Gleason
  * @Date: 2021-09-24 11:32:44
- * @LastEditTime: 2021-10-21 17:38:51
+ * @LastEditTime: 2021-11-02 13:57:02
  * @Description: webpack 配置(覆盖)
  */
 
@@ -18,10 +18,10 @@ const {
 const MockjsWebpackPlugin = require("mockplugin");
 
 const {
-	HOST_DEVICE, // 设备
-	HOST_SERVICE, // 服务
-	HOST_ORDER, // 订单
-	HOST_WORKER, // 工作台
+	REACT_APP_HOST_DEVICE, // 设备
+	REACT_APP_HOST_SERVICE, // 服务
+	REACT_APP_HOST_ORDER, // 订单
+	REACT_APP_HOST_WORKER, // 工作台
 	REACT_APP_ENV, // 环境标识
 	REACT_APP_MOCK_PORT, // mock服务 端口号
 	REACT_APP_MOCK_DATA_FOLDER, // mock 数据文件夹
@@ -33,7 +33,7 @@ const {
  * @return {String} path
  */
 const pathResolve = (pathUrl) => path.join(__dirname, pathUrl);
-
+console.log(REACT_APP_HOST_SERVICE);
 /**
  * @description: webpack 插件处理
  * @param {*}
@@ -58,6 +58,8 @@ module.exports = {
 			api: pathResolve("./src/api"),
 			store: pathResolve("./src/store"),
 			page: pathResolve("./src/page"),
+			utils: pathResolve("./src/utils"),
+			routes: pathResolve("./src/router"),
 		}),
 		addLessLoader({
 			lessOptions: {
@@ -84,7 +86,7 @@ module.exports = {
 				secure: false, // 使用的是 http 协议则设置为false，https 协议则设置为 true
 				ws: false, // 是否启用websockets
 				// target: "http:" + HOST.device, // 代理目标
-				target: "https:" + HOST_DEVICE, // 代理目标
+				target: REACT_APP_HOST_DEVICE, // 代理目标
 				changeOrigin: true, // 覆盖主机头来源
 				pathRewrite: {
 					"^/device": "",
@@ -94,7 +96,7 @@ module.exports = {
 				secure: false,
 				ws: false,
 				// target: "http:" + HOST.service,
-				target: "http:" + HOST_SERVICE,
+				target: REACT_APP_HOST_SERVICE,
 				changeOrigin: true,
 				pathRewrite: {
 					"^/service": "",
@@ -104,7 +106,7 @@ module.exports = {
 				secure: false,
 				ws: false,
 				// target: "http:" + HOST.order,
-				target: "http:" + HOST_ORDER,
+				target: REACT_APP_HOST_ORDER,
 				changeOrigin: true,
 				pathRewrite: {
 					"^/service": "",
@@ -114,7 +116,7 @@ module.exports = {
 				secure: false,
 				ws: false,
 				// target: "http:" + HOST.worker,
-				target: "http:" + HOST_WORKER,
+				target: REACT_APP_HOST_WORKER,
 				changeOrigin: true,
 				pathRewrite: {
 					"^/worker": "",

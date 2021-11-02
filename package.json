@@ -6,12 +6,13 @@
     "mock": "dotenv -e .env.mock react-app-rewired start",
     "debug": "dotenv -e .env.debug react-app-rewired start",
     "testing": "dotenv -e .env.testing react-app-rewired start",
-    "ptetest": "dotenv -e .env.pretest react-app-rewired start",
+    "pretest": "dotenv -e .env.pretest react-app-rewired start",
     "build": "dotenv -e .env.produce react-app-rewired build",
     "test": "react-app-rewired test --env=jsdom",
     "eject": "react-scripts eject"
   },
   "dependencies": {
+    "@loadable/component": "^5.15.0",
     "@reduxjs/toolkit": "^1.6.2",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
@@ -26,6 +27,8 @@
     "less": "^4.1.1",
     "less-loader": "^10.0.1",
     "lint-staged": "^11.1.2",
+    "nprogress": "^0.2.0",
+    "p-min-delay": "^4.0.1",
     "prettier": "^2.4.0",
     "qs": "^6.10.1",
     "react": "^17.0.2",

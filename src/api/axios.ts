@@ -2,27 +2,15 @@
  * @Description:
  * @Author: Gleason
  * @Date: 2021-04-14 11:52:20
- * @LastEditors: Please set LastEditors
- * @LastEditTime: 2021-10-29 14:17:11
+ * @LastEditors: Gleason
+ * @LastEditTime: 2021-11-02 16:13:17
  */
 import axios from "axios";
 
 const {
 	NODE_ENV, // 环境变量
 	REACT_APP_ENV, // 环境标识
-	HOST_DEVICE,
-	HOST_SERVICE,
-	HOST_ORDER,
-	HOST_WORKER,
 } = process.env;
-
-// 域名 映射关系
-const HostMap = new Map([
-	["device", HOST_DEVICE], // 设备
-	["service", HOST_SERVICE], // 服务
-	["order", HOST_ORDER], // 订单
-	["worker", HOST_WORKER], // 工人认证
-]);
 
 // 是否为 mock 环境
 const IS_MOCK = REACT_APP_ENV === "mock";
@@ -38,8 +26,7 @@ const DEFAULT_SYMBOL = pathname === "/" ? "device" : pathname;
 const PROXY_SYMBOL = IS_MOCK ? REACT_APP_ENV : DEFAULT_SYMBOL;
 
 // 生产环境: 正式域名
-const HOST_URL =
-	pathname === "/" ? HostMap.get("device") : HostMap.get(pathname);
+const HOST_URL = process.env[`REACT_APP_HOST_${DEFAULT_SYMBOL.toUpperCase()}`];
 
 // 基础URL
 const baseurl = IS_PROD ? HOST_URL : PROXY_SYMBOL;
@@ -90,7 +77,6 @@ Dio.interceptors.request.use(
 // 响应拦截
 Dio.interceptors.response.use(
 	(response: any) => {
-		console.log(response.headers.Authorization);
 		sessionStorage.setItem("Authorization", response.headers.Authorization);
 		return response;
 	},

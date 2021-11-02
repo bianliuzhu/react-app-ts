@@ -1,41 +1,39 @@
 /*
  * @Author: Gleason
  * @Date: 2021-09-14 16:18:32
- * @LastEditTime: 2021-10-29 17:04:38
+ * @LastEditTime: 2021-11-02 15:14:52
  * @Description:
  */
 
-import { login, vote } from "api";
+import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
+import loadable from "@/routes/loadable";
 
-export default function App() {
-	// const aaa = useSelector((state: any) => state.counter);
+// 公共模块
+const Index = loadable(
+	import(/* webpackChunkName: 'default' */ "@/components/index")
+);
 
-	const loginHandle = () => {
-		setInterval(async () => {
-			const res = await login({
-				code: "32323423424324324242",
-				"user-info": JSON.stringify({
-					nickName: "qwerr",
-					gender: 0,
-					language: "zh_CN",
-					city: "",
-					province: "",
-					country: "",
-					avatarUrl: "qwerqwer",
-				}),
-			});
-			console.log(res);
-		}, 1000);
-	};
-	const voteHandle = async () => {
-		const res = await vote({ type: 1, sign_id: 314848 });
-		console.log(res);
-	};
+// 基础页面
+const View404 = loadable(
+	import(/* webpackChunkName: '404' */ "@/components/404")
+);
+const View500 = loadable(
+	import(/* webpackChunkName: '500' */ "@/components/500")
+);
+const Login = loadable(
+	import(/* webpackChunkName: 'login' */ "@/components/login")
+);
 
-	return (
-		<div>
-			<button onClick={loginHandle}>登录</button>
-			<button onClick={voteHandle}>投票</button>
-		</div>
-	);
-}
+const App = () => (
+	<BrowserRouter>
+		<Switch>
+			<Route path="/" exact render={() => <Redirect to="/index" />} />
+			<Route path="/500" component={View500} />
+			<Route path="/404" component={View404} />
+			<Route path="/login" component={Login}></Route>
+			<Route component={Index} />
+		</Switch>
+	</BrowserRouter>
+);
+
+export default App;
