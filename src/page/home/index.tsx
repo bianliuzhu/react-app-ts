@@ -3,12 +3,12 @@
  * @Author: Gleason
  * @Date: 2021-11-01 11:29:54
  * @LastEditors: Gleason
- * @LastEditTime: 2021-11-02 16:32:36
+ * @LastEditTime: 2021-11-02 16:41:40
  */
 
 import { login } from "api";
 import { useHistory } from "react-router-dom";
-const AboutPage = () => {
+const HomePage = () => {
 	const history = useHistory();
 	const Handle = async () => {
 		const res = login();
@@ -26,4 +26,4 @@ const AboutPage = () => {
 	);
 };
 
-export default AboutPage;
+export default HomePage;
