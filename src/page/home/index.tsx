@@ -3,18 +3,25 @@
  * @Author: Gleason
  * @Date: 2021-11-01 11:29:54
  * @LastEditors: Gleason
- * @LastEditTime: 2021-11-02 15:08:23
+ * @LastEditTime: 2021-11-02 16:32:36
  */
-import { login } from "api";
 
+import { login } from "api";
+import { useHistory } from "react-router-dom";
 const AboutPage = () => {
+	const history = useHistory();
 	const Handle = async () => {
 		const res = login();
 		console.log(res);
 	};
+	const goAboutPage = () => {
+		history.push("/about");
+	};
 	return (
 		<div>
-			主页<button onClick={Handle}>点击</button>
+			<h1>主页</h1> <br />
+			<button onClick={Handle}>发起请求</button>
+			<button onClick={goAboutPage}>go about page</button>
 		</div>
 	);
 };
