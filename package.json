@@ -1,80 +1,78 @@
 {
-  "name": "react-app-ts",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "mock": "dotenv -e .env.mock react-app-rewired start",
-    "debug": "dotenv -e .env.debug react-app-rewired start",
-    "testing": "dotenv -e .env.testing react-app-rewired start",
-    "pretest": "dotenv -e .env.pretest react-app-rewired start",
-    "build": "dotenv -e .env.produce react-app-rewired build",
-    "test": "react-app-rewired test --env=jsdom",
-    "eject": "react-scripts eject"
-  },
-  "dependencies": {
-    "@loadable/component": "^5.15.0",
-    "@reduxjs/toolkit": "^1.6.2",
-    "@testing-library/jest-dom": "^5.14.1",
-    "@testing-library/react": "^11.2.7",
-    "@testing-library/user-event": "^12.8.3",
-    "@types/jest": "^27.0.1",
-    "@types/node": "^16.9.1",
-    "@types/react": "^17.0.20",
-    "@types/react-dom": "^17.0.9",
-    "antd-mobile": "^2.3.4",
-    "axios": "^0.21.4",
-    "husky": "^7.0.2",
-    "less": "^4.1.1",
-    "less-loader": "^10.0.1",
-    "lint-staged": "^11.1.2",
-    "nprogress": "^0.2.0",
-    "p-min-delay": "^4.0.1",
-    "prettier": "^2.4.0",
-    "qs": "^6.10.1",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-redux": "^7.2.5",
-    "react-router-dom": "^5.3.0",
-    "react-scripts": "4.0.3",
-    "redux": "^4.1.1",
-    "typescript": "^4.4.3",
-    "web-vitals": "^1.1.2"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "src/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
-      "prettier --single-quote --write",
-      "git add"
-    ]
-  },
-  "devDependencies": {
-    "@types/qs": "^6.9.7",
-    "@types/react-router-dom": "^5.3.0",
-    "babel-plugin-import": "^1.13.3",
-    "customize-cra": "^1.0.0",
-    "mockplugin": "^1.1.1",
-    "react-app-rewired": "^2.1.8"
-  }
+	"name": "react-app-ts",
+	"version": "0.1.0",
+	"private": true,
+	"scripts": {
+		"mock": "dotenv -e .env.mock react-app-rewired start",
+		"debug": "dotenv -e .env.debug react-app-rewired start",
+		"testing": "dotenv -e .env.testing react-app-rewired start",
+		"pretest": "dotenv -e .env.pretest react-app-rewired start",
+		"build": "dotenv -e .env.produce react-app-rewired build",
+		"test": "react-app-rewired test --env=jsdom",
+		"eject": "react-scripts eject",
+		"f2elint-scan": "f2elint scan",
+		"f2elint-fix": "f2elint fix"
+	},
+	"dependencies": {
+		"@loadable/component": "^5.15.0",
+		"@reduxjs/toolkit": "^1.6.2",
+		"@testing-library/jest-dom": "^5.14.1",
+		"@testing-library/react": "^11.2.7",
+		"@testing-library/user-event": "^12.8.3",
+		"@types/jest": "^27.0.1",
+		"@types/node": "^16.9.1",
+		"@types/react": "^17.0.20",
+		"@types/react-dom": "^17.0.9",
+		"antd-mobile": "^2.3.4",
+		"axios": "^0.21.4",
+		"husky": "^7.0.2",
+		"less": "^4.1.1",
+		"less-loader": "^10.0.1",
+		"lint-staged": "^11.1.2",
+		"nprogress": "^0.2.0",
+		"p-min-delay": "^4.0.1",
+		"prettier": "^2.4.0",
+		"qs": "^6.10.1",
+		"react": "^17.0.2",
+		"react-dom": "^17.0.2",
+		"react-redux": "^7.2.5",
+		"react-router-dom": "^5.3.0",
+		"react-scripts": "4.0.3",
+		"redux": "^4.1.1",
+		"typescript": "^4.4.3",
+		"web-vitals": "^1.1.2"
+	},
+	"browserslist": {
+		"production": [
+			">0.2%",
+			"not dead",
+			"not op_mini all"
+		],
+		"development": [
+			"last 1 chrome version",
+			"last 1 firefox version",
+			"last 1 safari version"
+		]
+	},
+	"husky": {
+		"hooks": {
+			"pre-commit": "f2elint commit-file-scan",
+			"commit-msg": "f2elint commit-msg-scan"
+		}
+	},
+	"lint-staged": {
+		"src/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
+			"prettier --single-quote --write",
+			"git add"
+		]
+	},
+	"devDependencies": {
+		"@types/qs": "^6.9.7",
+		"@types/react-router-dom": "^5.3.0",
+		"babel-plugin-import": "^1.13.3",
+		"customize-cra": "^1.0.0",
+		"f2elint": "^1.2.1",
+		"mockplugin": "^1.1.1",
+		"react-app-rewired": "^2.1.8"
+	}
 }

@@ -3,19 +3,19 @@
  * @Author: Gleason
  * @Date: 2021-11-01 11:30:14
  * @LastEditors: Gleason
- * @LastEditTime: 2021-11-02 18:13:39
+ * @LastEditTime: 2021-11-02 18:29:55
  */
-import { Route, Switch, Redirect, withRouter } from "react-router-dom";
+import { Route, Switch, Redirect, withRouter } from 'react-router-dom';
 
-import routes from "@/routes";
+import routes from '@/routes';
 
 // 捕获错误边界组件
-import ErrorBoundary from "@/components/error";
+import ErrorBoundary from '@/components/error';
 
-const MainPart = (props) => {
-	let { auth } = JSON.parse(localStorage.getItem("user"))
-		? JSON.parse(localStorage.getItem("user"))
-		: "";
+const MainPart = () => {
+	const { auth }: any = JSON.parse(localStorage.getItem('user'))
+		? JSON.parse(localStorage.getItem('user'))
+		: '';
 
 	return (
 		<ErrorBoundary>
@@ -26,16 +26,16 @@ const MainPart = (props) => {
 							key={item.path}
 							path={item.path}
 							exact={item.exact}
-							render={(props) =>
-								!auth ? (
-									<item.component {...props} />
-								) : item.auth && item.auth.indexOf(auth) !== -1 ? (
-									<item.component {...props} />
-								) : (
-									<Redirect to="/404" {...props} />
-								)
-							}
-						></Route>
+							render={(props) => {
+								if (!auth) {
+									return <item.component {...props} />;
+								} else if (item.auth && item.auth.indexOf(auth) !== -1) {
+									return <item.component {...props} />;
+								} else {
+									return <Redirect to="/404" {...props} />;
+								}
+							}}
+						/>
 					);
 				})}
 				<Redirect to="/404" />
