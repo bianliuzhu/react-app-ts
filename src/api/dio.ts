@@ -3,12 +3,12 @@
  * @Author: Gleason
  * @Date: 2021-04-13 16:56:39
  * @LastEditors: Gleason
- * @LastEditTime: 2021-11-02 16:20:28
+ * @LastEditTime: 2021-11-03 14:45:54
  */
-import Dio from "./axios";
-import QueryString from "qs";
-import { Toast } from "antd-mobile";
-import CodeHandle from "./code";
+import Dio from './axios';
+import QueryString from 'qs';
+import { Toast } from 'antd-mobile';
+import CodeHandle from './code';
 
 // 响应数据结构
 interface Resonse {
@@ -19,41 +19,38 @@ interface Resonse {
 	config: any; // `config` 是为请求提供的配置信息
 	request: any;
 }
-// 请求数据结构
-interface Request {
-	situation: string[];
-	dio: (
-		method?: string,
-		url?: string,
-		param?: any,
-		allData?: boolean,
-		config?: any
-	) => void;
-}
 
 // 请求方法封装
-class Request {
+class Service {
+	dio: (
+		method: string,
+		url: string,
+		params: {},
+		allData: boolean,
+		loading: boolean,
+		config?: {},
+	) => Promise<unknown>;
 	constructor() {
 		this.dio = (
-			method = "post",
-			url = "",
+			method = 'post',
+			url = '',
 			params = {},
 			allData = true,
 			loading = true,
-			config = {}
+			config = {},
 		) => {
-			const situation = ["put", "post", "patch", "delete"];
+			const situation = ['put', 'post', 'patch', 'delete'];
 
 			// 打开 loading
-			if (loading) Toast.loading("Loading...", 0);
+			if (loading) Toast.loading('Loading...', 0);
 
 			return new Promise((resolve, reject) => {
 				Dio({
 					method,
 					url,
-					params: method === "get" ? params : {}, // GET 方法请求带参
+					params: method === 'get' ? params : {}, // GET 方法请求带参
 					data: situation.includes(method)
-						? QueryString.stringify(params, { arrayFormat: "brackets" })
+						? QueryString.stringify(params, { arrayFormat: 'brackets' })
 						: {}, // 其他方法请求带参
 					...config,
 				})
@@ -71,16 +68,16 @@ class Request {
 		};
 	}
 
-	get = (url = "", params: any = {}, allData = false, loading = true) =>
-		this.dio("get", url, params, allData, loading);
+	get = (url = '', params: any = {}, allData = false, loading = true) =>
+		this.dio('get', url, params, allData, loading);
 
-	post = (url = "", params: any = {}, allData = false, loading = true) =>
-		this.dio("post", url, params, allData, loading);
+	post = (url = '', params: any = {}, allData = false, loading = true) =>
+		this.dio('post', url, params, allData, loading);
 
-	put = (url = "", params: any = {}, allData = false, loading = true) =>
-		this.dio("put", url, params, allData, loading);
+	put = (url = '', params: any = {}, allData = false, loading = true) =>
+		this.dio('put', url, params, allData, loading);
 
-	delete = (url = "", params: any = {}, allData = false, loading = true) =>
-		this.dio("delete", url, params, allData, loading);
+	delete = (url = '', params: any = {}, allData = false, loading = true) =>
+		this.dio('delete', url, params, allData, loading);
 }
-export default new Request();
+export default new Service();

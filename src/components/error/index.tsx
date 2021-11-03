@@ -3,9 +3,9 @@
  * @Author: Gleason
  * @Date: 2021-11-01 14:43:52
  * @LastEditors: Gleason
- * @LastEditTime: 2021-11-01 14:59:32
+ * @LastEditTime: 2021-11-03 14:53:33
  */
-import { Component } from "react";
+import { Component } from 'react';
 
 interface IProps {}
 interface IState {
@@ -19,11 +19,12 @@ class ErrorBoundary extends Component<IProps, IState> {
 	}
 
 	static getDerivedStateFromError(error) {
+		console.error(error);
 		// 更新 state 使下一次渲染能够显示降级后的 UI
 		return { hasError: true };
 	}
 
-	componentDidCatch(error, errorInfo) {
+	componentDidCatch(error: any, errorInfo: any) {
 		// 你同样可以将错误日志上报给服务器
 		// logErrorToMyService(error, errorInfo);
 		throw new Error(`捕获UI错误: ${errorInfo}`);

@@ -3,11 +3,12 @@
  * @Author: Gleason
  * @Date: 2021-11-01 11:29:54
  * @LastEditors: Gleason
- * @LastEditTime: 2021-11-02 16:41:40
+ * @LastEditTime: 2021-11-03 15:00:07
  */
 
-import { login } from "api";
-import { useHistory } from "react-router-dom";
+import { login } from 'api';
+import { useHistory } from 'react-router-dom';
+
 const HomePage = () => {
 	const history = useHistory();
 	const Handle = async () => {
@@ -15,7 +16,7 @@ const HomePage = () => {
 		console.log(res);
 	};
 	const goAboutPage = () => {
-		history.push("/about");
+		history.push('/about');
 	};
 	return (
 		<div>
