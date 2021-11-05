@@ -27,7 +27,6 @@
 		"axios": "^0.21.4",
 		"husky": "^7.0.2",
 		"less": "^4.1.1",
-		"less-loader": "^10.0.1",
 		"lint-staged": "^11.1.2",
 		"nprogress": "^0.2.0",
 		"p-min-delay": "^4.0.1",
@@ -72,7 +71,10 @@
 		"babel-plugin-import": "^1.13.3",
 		"customize-cra": "^1.0.0",
 		"f2elint": "^1.2.1",
+		"less-loader": "^7.0.0",
 		"mockplugin": "^1.1.1",
+		"postcss": "^8.3.11",
+		"postcss-pxtorem": "^5.1.1",
 		"react-app-rewired": "^2.1.8"
 	}
 }

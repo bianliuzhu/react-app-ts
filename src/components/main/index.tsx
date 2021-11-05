@@ -3,7 +3,7 @@
  * @Author: Gleason
  * @Date: 2021-11-01 11:30:14
  * @LastEditors: Gleason
- * @LastEditTime: 2021-11-02 18:29:55
+ * @LastEditTime: 2021-11-03 15:22:59
  */
 import { Route, Switch, Redirect, withRouter } from 'react-router-dom';
 
@@ -13,10 +13,8 @@ import routes from '@/routes';
 import ErrorBoundary from '@/components/error';
 
 const MainPart = () => {
-	const { auth }: any = JSON.parse(localStorage.getItem('user'))
-		? JSON.parse(localStorage.getItem('user'))
-		: '';
-
+	const USER = JSON.parse(localStorage.getItem('user'));
+	const { auth }: any = USER || {};
 	return (
 		<ErrorBoundary>
 			<Switch>
@@ -27,8 +25,8 @@ const MainPart = () => {
 							path={item.path}
 							exact={item.exact}
 							render={(props) => {
-								if (!auth) {
-									return <item.component {...props} />;
+								if (auth === undefined) {
+									return <Redirect to="/login" {...props} />;
 								} else if (item.auth && item.auth.indexOf(auth) !== -1) {
 									return <item.component {...props} />;
 								} else {
