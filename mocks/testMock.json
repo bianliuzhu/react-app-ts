@@ -6,22 +6,22 @@
  * @prams {string} filed2 入参2
  * @prams {string} filed3 入参3
  */
- {
+{
 	"code": 200,
 	"msg": "陈公公",
 	"data": {
 		"aaa": ["string1", "string2", "string3"],
 		"list|2-5": [
-		  {
-		    "title": "@ctitle",
-		    "agree": false,
-		    "price|100-1000.2": 100.12,
-		    "image": "@image",
-		    "name": "@ctitle",
-		    "skuid": "@id",
-		    "sort|0-1": 0,
-		    "cccc|100-1000.2": 51.00
-		  }
+			{
+				"title": "@ctitle",
+				"agree": false,
+				"price|100-1000.2": 100.12,
+				"image": "@image",
+				"name": "@ctitle",
+				"skuid": "@id",
+				"sort|0-1": 0,
+				"cccc|100-1000.2": 51.0
+			}
 		]
 	}
 }
