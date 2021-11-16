@@ -3,12 +3,12 @@
  * @Author: Gleason
  * @Date: 2021-11-16 14:04:52
  * @LastEditors: Gleason
- * @LastEditTime: 2021-11-16 16:27:38
+ * @LastEditTime: 2021-11-16 16:33:27
  */
 module.exports = function (plop) {
   // 控制器生成器
   plop.setGenerator('controller', {
-    description: '生成器说明', // 生成器说明
+    description: '创建页面', // 生成器说明
     prompts: [{
       type: 'input',  // 接受类型，这里为接受终端输入
       name: 'PageName', // 输入的内容赋给变量name
