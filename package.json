@@ -9,6 +9,7 @@
     "pretest": "dotenv -e .env.pretest react-app-rewired start",
     "build": "dotenv -e .env.produce react-app-rewired build",
     "test": "react-app-rewired test --env=jsdom",
+    "plop": "plop",
     "eject": "react-scripts eject",
     "f2elint-scan": "f2elint scan",
     "f2elint-fix": "f2elint fix"
@@ -73,6 +74,7 @@
     "f2elint": "^1.1.1",
     "less-loader": "^7.0.0",
     "mockplugin": "^1.1.1",
+    "plop": "^2.7.6",
     "postcss": "^8.3.11",
     "postcss-pxtorem": "^5.1.1",
     "react-app-rewired": "^2.1.8"
