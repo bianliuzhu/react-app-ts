@@ -1,16 +1,13 @@
 /*
  * @Author: your name
  * @Date: 2021-10-21 15:03:08
- * @LastEditTime: 2021-11-17 10:54:23
+ * @LastEditTime: 2021-11-17 11:07:53
  * @LastEditors: Gleason
  * @Description: In User Settings Edit
  * @FilePath: \react-app-ts\src\store\reducer\counter.ts
  */
 import { createSlice } from '@reduxjs/toolkit';
 
-interface initState {
-	value: number;
-}
 const initialState: initState = {
 	value: 0,
 };
@@ -22,10 +19,10 @@ export const counterSlice = createSlice({
 		increment: (state: initState) => {
 			state.value += 1;
 		},
-		decrement: (state) => {
+		decrement: (state: initState) => {
 			state.value -= 1;
 		},
-		incrementByAmount: (state, action) => {
+		incrementByAmount: (state: initState, action) => {
 			state.value += action.payload;
 		},
 	},

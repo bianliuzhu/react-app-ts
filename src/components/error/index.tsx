@@ -3,7 +3,7 @@
  * @Author: Gleason
  * @Date: 2021-11-01 14:43:52
  * @LastEditors: Gleason
- * @LastEditTime: 2021-11-17 10:28:38
+ * @LastEditTime: 2021-11-17 11:02:41
  */
 import { Component } from 'react';
 
@@ -19,7 +19,8 @@ class ErrorBoundary extends Component<IProps, IState> {
 		throw new Error(`捕获UI错误: ${errorInfo}`);
 	}
 
-	getDerivedStateFromError(error: any) {
+	// eslint-disable-next-line @typescript-eslint/member-ordering
+	static getDerivedStateFromError(error: any) {
 		console.error(error);
 		// 更新 state 使下一次渲染能够显示降级后的 UI
 		return { hasError: true };
