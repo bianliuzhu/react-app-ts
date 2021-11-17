@@ -3,14 +3,9 @@
  * @Author: Gleason
  * @Date: 2021-11-01 14:43:52
  * @LastEditors: Gleason
- * @LastEditTime: 2021-11-03 14:53:33
+ * @LastEditTime: 2021-11-17 10:28:38
  */
 import { Component } from 'react';
-
-interface IProps {}
-interface IState {
-	hasError: boolean;
-}
 
 class ErrorBoundary extends Component<IProps, IState> {
 	constructor(props: IProps) {
@@ -18,16 +13,16 @@ class ErrorBoundary extends Component<IProps, IState> {
 		this.state = { hasError: false };
 	}
 
-	static getDerivedStateFromError(error) {
-		console.error(error);
-		// 更新 state 使下一次渲染能够显示降级后的 UI
-		return { hasError: true };
-	}
-
 	componentDidCatch(error: any, errorInfo: any) {
 		// 你同样可以将错误日志上报给服务器
 		// logErrorToMyService(error, errorInfo);
 		throw new Error(`捕获UI错误: ${errorInfo}`);
+	}
+
+	getDerivedStateFromError(error: any) {
+		console.error(error);
+		// 更新 state 使下一次渲染能够显示降级后的 UI
+		return { hasError: true };
 	}
 
 	render() {

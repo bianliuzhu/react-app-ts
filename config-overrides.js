@@ -1,7 +1,7 @@
 /*
  * @Author: Gleason
  * @Date: 2021-09-24 11:32:44
- * @LastEditTime: 2021-11-04 14:25:08
+ * @LastEditTime: 2021-11-17 09:47:23
  * @Description: webpack 配置(覆盖)
  */
 
@@ -34,7 +34,7 @@ const {
  * @return {String} path
  */
 const pathResolve = (pathUrl) => path.join(__dirname, pathUrl);
-console.log(REACT_APP_HOST_SERVICE);
+
 /**
  * @description: webpack 插件处理
  * @param {*}
@@ -48,7 +48,7 @@ const PluginHandle = () => {
 			port: Number(REACT_APP_MOCK_PORT),
 		});
 	}
-	return () => {};
+	return () => { };
 };
 
 // override

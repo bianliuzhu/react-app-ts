@@ -3,9 +3,9 @@
  * @Author: Gleason
  * @Date: 2021-04-14 11:52:20
  * @LastEditors: Gleason
- * @LastEditTime: 2021-11-02 16:13:17
+ * @LastEditTime: 2021-11-17 09:59:22
  */
-import axios from "axios";
+import axios from 'axios';
 
 const {
 	NODE_ENV, // 环境变量
@@ -13,14 +13,14 @@ const {
 } = process.env;
 
 // 是否为 mock 环境
-const IS_MOCK = REACT_APP_ENV === "mock";
+const IS_MOCK = REACT_APP_ENV === 'mock';
 
 // 是否为生产模式
-const IS_PROD = NODE_ENV === "production";
+const IS_PROD = NODE_ENV === 'production';
 
 // 路径名称
-const pathname = window.location.pathname.split("/")[3] || "/";
-const DEFAULT_SYMBOL = pathname === "/" ? "device" : pathname;
+const pathname = window.location.pathname.split('/')[3] || '/';
+const DEFAULT_SYMBOL = pathname === '/' ? 'device' : pathname;
 
 // 开发环境: 代理标识
 const PROXY_SYMBOL = IS_MOCK ? REACT_APP_ENV : DEFAULT_SYMBOL;
@@ -38,7 +38,7 @@ const Dio: any = axios.create({
 
 	// 定义统一的请求头部
 	headers: {
-		"Content-Type": "application/x-www-form-urlencoded",
+		'Content-Type': 'application/x-www-form-urlencoded',
 		// 'Content-Type': 'application/json'
 	},
 
@@ -48,13 +48,13 @@ const Dio: any = axios.create({
 	validateStatus(status: number) {
 		switch (status) {
 			case 404:
-				console.log("失去页面页");
+				console.error('失去页面页');
 				break;
 			case 500:
-				console.log("服务错误页");
+				console.error('服务错误页');
 				break;
 			default:
-				console.log("http码正常");
+				console.warn('http码正常');
 		}
 		return status < 500;
 	},
@@ -65,24 +65,24 @@ Dio.interceptors.request.use(
 	(config: any) => {
 		// 自定义 header，可添加项目 token
 		// eslint-disable-next-line no-param-reassign
-		config.headers.Authorization = sessionStorage.getItem("Authorization");
+		config.headers.Authorization = sessionStorage.getItem('Authorization');
 
 		return config;
 	},
 	(error: any) => {
 		console.error(error);
-	}
+	},
 );
 
 // 响应拦截
 Dio.interceptors.response.use(
 	(response: any) => {
-		sessionStorage.setItem("Authorization", response.headers.Authorization);
+		sessionStorage.setItem('Authorization', response.headers.Authorization);
 		return response;
 	},
 	(error: any) => {
 		console.error(error);
-	}
+	},
 );
 
 export default Dio;

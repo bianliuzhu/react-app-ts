@@ -4,3 +4,4 @@ dist/
 **/*.min.js
 **/*-min.js
 **/*.bundle.js
+config-overrides.js
