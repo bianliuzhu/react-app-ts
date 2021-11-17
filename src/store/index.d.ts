@@ -7,4 +7,5 @@
  */
 interface initState {
 	value: number;
+	name: string;
 }

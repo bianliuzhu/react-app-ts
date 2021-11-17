@@ -3,7 +3,7 @@
  * @Date: 2021-10-21 15:03:08
  * @LastEditTime: 2021-11-17 11:07:53
  * @LastEditors: Gleason
- * @Description: 计数store
+ * @Description: 测试 store
  */
 import { createSlice } from '@reduxjs/toolkit';
 

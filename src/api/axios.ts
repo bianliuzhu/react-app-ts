@@ -20,6 +20,7 @@ const IS_PROD = NODE_ENV === 'production';
 
 // 路径名称
 const pathname = window.location.pathname.split('/')[3] || '/';
+
 const DEFAULT_SYMBOL = pathname === '/' ? 'device' : pathname;
 
 // 开发环境: 代理标识

@@ -5,21 +5,21 @@
  * @LastEditors: Gleason
  * @LastEditTime: 2021-11-02 18:18:43
  */
-import loadable from "@/routes/loadable";
+import loadable from '@/routes/loadable';
 
 const routes = [
 	{
-		path: "/index",
+		path: '/index',
 		exact: true,
-		name: "index",
-		component: loadable(import(/* webpackChunkName: 'about' */ "@/page/home")),
+		name: 'index',
+		component: loadable(import(/* webpackChunkName: 'about' */ '@/page/home')),
 		auth: [1],
 	},
 	{
-		path: "/about",
+		path: '/about',
 		exact: true,
-		name: "about",
-		component: loadable(import(/* webpackChunkName: 'about' */ "@/page/about")),
+		name: 'about',
+		component: loadable(import(/* webpackChunkName: 'about' */ '@/page/about')),
 		auth: [1],
 	},
 	// {

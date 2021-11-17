@@ -10,7 +10,7 @@ import dio from "./dio";
 /**
  * 登录
  */
-export const login = (param) => dio.post("api/customer/login", param);
+export const login = (param) => dio.post("getTime", param);
 /**
  * 投票
  */
