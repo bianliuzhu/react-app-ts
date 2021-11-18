@@ -9,13 +9,13 @@ const fileExists = require('./file-exists');
 
 module.exports = function (plop) {
 	// 控制器生成器
-	plop.setGenerator('controller', {
+	plop.setGenerator('createPage', {
 		description: '创建页面', 													// 生成器说明
 		prompts: [{
 			type: 'input',  															// 接受类型，这里为接受终端输入
 			name: 'PageName',															// 输入的内容赋给变量name
 			default: 'unknown-page',											// 默认名称未知的页面名称
-			message: '请输入页面名称', 											 // 提示内容：输入控制器名称
+			message: '请输入页面名称:', 											 // 提示内容：输入控制器名称
 			validate: value => {
 				if (/.+/.test(value)) {
 					return fileExists(value)
@@ -27,9 +27,9 @@ module.exports = function (plop) {
 		}],
 		actions: [
 			{
-				type: 'add',  															// 动作类型：新增
+				type: 'add',  																// 动作类型：新增
 				path: '../src/page/{{PageName}}/index.tsx',		// 创建路径
-				templateFile: 'template/index.tsx.hbs',		// 模板，将根据此模板内容生成新文件
+				templateFile: 'template/index.tsx.hbs',				// 模板，将根据此模板内容生成新文件
 			},
 			{
 				type: 'add',
