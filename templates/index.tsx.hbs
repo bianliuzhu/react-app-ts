@@ -1,12 +1,13 @@
-import { useLayoutEffect, useEffect, useState } from 'react';
+import { useLayoutEffect, useState } from 'react';
 import { useHistory } from "react-router-dom";
 
 import {  } from "api";
 import './index.less'
 import './index.d'
 
-const {{PageName}} = () => {
+const {{PageName}}Page = () => {
 	const history = useHistory();
+	const [state, setState] = useState<unknown>()
   useLayoutEffect(() => {}, []);
 	return (
     <>
@@ -15,4 +16,4 @@ const {{PageName}} = () => {
   );
 };
 
-export default {{PageName}};
+export default {{PageName}}Page;
