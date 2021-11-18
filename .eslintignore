@@ -5,3 +5,4 @@ dist/
 **/*-min.js
 **/*.bundle.js
 config-overrides.js
+generator/
