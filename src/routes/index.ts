@@ -12,7 +12,7 @@ const routes = [
 		path: '/index',
 		exact: true,
 		name: 'index',
-		component: loadable(import(/* webpackChunkName: 'about' */ '@/page/home')),
+		component: loadable(import(/* webpackChunkName: 'homepage' */ '@/page/home')),
 		auth: [1],
 	},
 	{
@@ -20,6 +20,13 @@ const routes = [
 		exact: true,
 		name: 'about',
 		component: loadable(import(/* webpackChunkName: 'about' */ '@/page/about')),
+		auth: [1],
+	},
+	{
+		path: '/device',
+		exact: true,
+		name: 'about',
+		component: loadable(import(/* webpackChunkName: 'device' */ '@/page/device')),
 		auth: [1],
 	},
 	// {

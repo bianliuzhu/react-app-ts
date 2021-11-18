@@ -27,7 +27,10 @@ const HomePage = () => {
 		<div>
 			<h1>主页</h1> <br />
 			<button onClick={Handle}>发起请求</button>
+			<br />
 			<button onClick={goAboutPage}>go about page</button>
+			<br />
+			<button onClick={() => history.push('/device')}>go device page</button>
 		</div>
 	);
 };

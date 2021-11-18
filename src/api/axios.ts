@@ -20,11 +20,11 @@ const IS_PROD = NODE_ENV === 'production';
 
 // 路径名称
 const pathname = window.location.pathname.split('/')[3] || '/';
-
+console.error(pathname);
 const DEFAULT_SYMBOL = pathname === '/' ? 'device' : pathname;
 
 // 开发环境: 代理标识
-const PROXY_SYMBOL = IS_MOCK ? REACT_APP_ENV : DEFAULT_SYMBOL;
+const PROXY_SYMBOL = IS_MOCK ? REACT_APP_ENV : `${DEFAULT_SYMBOL}-api`;
 
 // 生产环境: 正式域名
 const HOST_URL = process.env[`REACT_APP_HOST_${DEFAULT_SYMBOL.toUpperCase()}`];

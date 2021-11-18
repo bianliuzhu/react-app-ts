@@ -92,44 +92,44 @@ module.exports = {
 	},
 	devServer: (configFunction) => (proxy, allowedHost) => {
 		proxy = {
-			'/device': {
+			'/device-api': {
 				secure: false, // 使用的是 http 协议则设置为false，https 协议则设置为 true
 				ws: false, // 是否启用websockets
 				// target: "http:" + HOST.device, // 代理目标
 				target: REACT_APP_HOST_DEVICE, // 代理目标
 				changeOrigin: true, // 覆盖主机头来源
 				pathRewrite: {
-					'^/device': '',
+					'^/device-api': '',
 				},
 			},
-			'/service': {
+			'/service-api': {
 				secure: false,
 				ws: false,
 				// target: "http:" + HOST.service,
 				target: REACT_APP_HOST_SERVICE,
 				changeOrigin: true,
 				pathRewrite: {
-					'^/service': '',
+					'^/service-api': '',
 				},
 			},
-			'/order': {
+			'/order-api': {
 				secure: false,
 				ws: false,
 				// target: "http:" + HOST.order,
 				target: REACT_APP_HOST_ORDER,
 				changeOrigin: true,
 				pathRewrite: {
-					'^/service': '',
+					'^/service-api': '',
 				},
 			},
-			'/worker': {
+			'/worker-api': {
 				secure: false,
 				ws: false,
 				// target: "http:" + HOST.worker,
 				target: REACT_APP_HOST_WORKER,
 				changeOrigin: true,
 				pathRewrite: {
-					'^/worker': '',
+					'^/worker-api': '',
 				},
 			},
 			[`/${REACT_APP_ENV}`]: {

@@ -12,6 +12,6 @@ import dio from "./dio";
  */
 export const login = (param) => dio.post("getTime", param);
 /**
- * 投票
+ * 随机一句名言
  */
-export const vote = (param) => dio.post("api/activity/vote", param);
+export const vote = (param) => dio.get("sentences", param);
