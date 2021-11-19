@@ -25,15 +25,10 @@ const routes = [
 	{
 		path: '/device',
 		exact: true,
-		name: 'about',
+		name: 'device',
 		component: loadable(import(/* webpackChunkName: 'device' */ '@/page/device')),
 		auth: [1],
 	},
-	// {
-	// 	path: "/one/two/three",
-	// 	exact: false, name: "三级",
-	// 	component: Three
-	// },
 ];
 
 export default routes;
