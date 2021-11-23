@@ -17,15 +17,15 @@ const View500 = loadable(import(/* webpackChunkName: '500' */ '@/components/500'
 const Login = loadable(import(/* webpackChunkName: 'login' */ '@/components/login'));
 
 const App = () => (
-  <BrowserRouter>
-    <Switch>
-      <Route path="/" exact render={() => <Redirect to="/index" />} />
-      <Route path="/500" component={View500} />
-      <Route path="/404" component={View404} />
-      <Route path="/login" component={Login} />
-      <Route component={Main} />
-    </Switch>
-  </BrowserRouter>
+	<BrowserRouter>
+		<Switch>
+			<Route path="/" exact render={() => <Redirect to="/index" />} />
+			<Route path="/500" component={View500} />
+			<Route path="/404" component={View404} />
+			<Route path="/login" component={Login} />
+			<Route component={Main} />
+		</Switch>
+	</BrowserRouter>
 );
 
 export default App;
