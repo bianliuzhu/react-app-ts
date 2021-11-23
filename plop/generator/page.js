@@ -5,7 +5,7 @@ const rootPath = require('app-root-path');
 const fileExists = require('../../plop/file-exists');
 
 module.exports = {
-	description: '创建页面', 													// 生成器说明
+	description: '创建 Page', 													// 生成器说明
 	prompts: [{
 		type: 'input',  															// 接受类型，这里为接受终端输入
 		name: 'PageName',															// 输入的内容赋给变量name

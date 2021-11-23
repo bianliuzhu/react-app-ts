@@ -7,6 +7,8 @@
  */
 
 const createPage = require('./generator/page')
+
+
 module.exports = function (plop) {
 	plop.setGenerator('createPage', createPage);
 };
