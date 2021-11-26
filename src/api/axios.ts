@@ -3,9 +3,10 @@
  * @Author: Gleason
  * @Date: 2021-04-14 11:52:20
  * @LastEditors: Gleason
- * @LastEditTime: 2021-11-26 10:52:03
+ * @LastEditTime: 2021-11-26 14:58:22
  */
 import axios from 'axios';
+import QS from 'qs';
 
 const {
 	NODE_ENV, // 环境变量
@@ -20,7 +21,7 @@ const IS_PROD = NODE_ENV === 'production';
 
 // 路径名称
 const pathname = window.location.pathname.split('/')[3] || '/';
-console.error(pathname);
+
 const DEFAULT_SYMBOL = pathname === '/' ? 'device' : pathname;
 
 // 开发环境: 代理标识
@@ -55,7 +56,7 @@ const Dio: any = axios.create({
 				console.error('服务错误页');
 				break;
 			default:
-				console.warn('http码正常');
+				console.log('http码正常');
 		}
 		return status < 500;
 	},
@@ -68,13 +69,13 @@ const Dio: any = axios.create({
  */
 function generateReqKey(config) {
 	const { method, url, params, data } = config;
-	return [method, url, params, data].join('&');
+	return [method, url, QS.stringify(params), QS.stringify(data)].join('&');
 }
 
 const pendingRequest = new Map();
 
 /**
- * @description: 当前请求信息添加到pendingRequest对象中
+ * @description: 当前请求信息添加到 pendingRequest 对象中
  * @param {*} config
  * @return {*}
  */
@@ -88,17 +89,28 @@ function addPendingRequest(config) {
 			}
 		});
 }
+function removePendingRequest(config) {
+	const requestKey = generateReqKey(config);
+	console.log('requestKey', requestKey);
+	if (pendingRequest.has(requestKey)) {
+		const cancelToken = pendingRequest.get(requestKey);
+		cancelToken(requestKey);
+		pendingRequest.delete(requestKey);
+	}
+}
 // 请求拦截
 Dio.interceptors.request.use(
 	(config: any) => {
+		console.log('请求拦截');
 		// 自定义 header，可添加项目 token
-		// eslint-disable-next-line no-param-reassign
 		config.headers.Authorization = sessionStorage.getItem('Authorization');
+		removePendingRequest(config); // 检查是否存在重复请求，若存在则取消已发的请求
+		addPendingRequest(config); // 把当前请求信息添加到pendingRequest对象中
 
 		return config;
 	},
 	(error: any) => {
-		console.error(error);
+		console.error('request interceptors', error);
 	},
 );
 
@@ -106,10 +118,17 @@ Dio.interceptors.request.use(
 Dio.interceptors.response.use(
 	(response: any) => {
 		sessionStorage.setItem('Authorization', response.headers.Authorization);
+		removePendingRequest(response.config); // 从pendingRequest对象中移除请求
 		return response;
 	},
 	(error: any) => {
-		console.error(error);
+		removePendingRequest(error.config || {}); // 从pendingRequest对象中移除请求
+		if (axios.isCancel(error)) {
+			console.warn(`已取消的重复请求：${error.message}`);
+		} else {
+			// 添加异常处理
+		}
+		return Promise.reject(error);
 	},
 );
 

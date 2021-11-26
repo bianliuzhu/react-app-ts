@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-09-14 16:18:35
- * @LastEditTime: 2021-11-17 10:11:50
+ * @LastEditTime: 2021-11-26 14:19:03
  * @LastEditors: Gleason
  * @Description: In User Settings Edit
  * @FilePath: \react-app-ts\src\index.tsx
@@ -24,6 +24,6 @@ ReactDOM.render(
 );
 
 // 性能分析报告
-reportWebVitals((param) => {
-	console.warn('性能分析', param);
+reportWebVitals(() => {
+	// console.log('性能分析', param);
 });
