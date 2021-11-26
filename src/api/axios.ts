@@ -3,7 +3,7 @@
  * @Author: Gleason
  * @Date: 2021-04-14 11:52:20
  * @LastEditors: Gleason
- * @LastEditTime: 2021-11-17 09:59:22
+ * @LastEditTime: 2021-11-26 10:52:03
  */
 import axios from 'axios';
 
@@ -61,6 +61,33 @@ const Dio: any = axios.create({
 	},
 });
 
+/**
+ * @description: 根据当前请求的信息，生成请求 Key
+ * @param {*} config
+ * @return {*}
+ */
+function generateReqKey(config) {
+	const { method, url, params, data } = config;
+	return [method, url, params, data].join('&');
+}
+
+const pendingRequest = new Map();
+
+/**
+ * @description: 当前请求信息添加到pendingRequest对象中
+ * @param {*} config
+ * @return {*}
+ */
+function addPendingRequest(config) {
+	const requestKey = generateReqKey(config);
+	config.cancelToken =
+		config.cancelToken ||
+		new axios.CancelToken((cancel) => {
+			if (!pendingRequest.has(requestKey)) {
+				pendingRequest.set(requestKey, cancel);
+			}
+		});
+}
 // 请求拦截
 Dio.interceptors.request.use(
 	(config: any) => {
