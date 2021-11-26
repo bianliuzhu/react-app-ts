@@ -3,7 +3,7 @@
  * @Author: Gleason
  * @Date: 2021-04-13 16:56:39
  * @LastEditors: Gleason
- * @LastEditTime: 2021-11-03 14:45:54
+ * @LastEditTime: 2021-11-26 17:59:19
  */
 import Dio from './axios';
 import QueryString from 'qs';
@@ -22,6 +22,9 @@ interface Resonse {
 
 // 请求方法封装
 class Service {
+	// 进行中的请求
+	pendingRequest = new Map();
+
 	dio: (
 		method: string,
 		url: string,
@@ -40,9 +43,27 @@ class Service {
 			config = {},
 		) => {
 			const situation = ['put', 'post', 'patch', 'delete'];
-
 			// 打开 loading
 			if (loading) Toast.loading('Loading...', 0);
+
+			// 记录当前 请求key
+			const reqKey = this.generateReqKey({
+				method,
+				url,
+				params,
+			});
+
+			// 判断是否有该请求
+			if (this.pendingRequest.has(reqKey)) {
+				const timer = setTimeout(() => {
+					this.pendingRequest.delete(reqKey);
+					Toast.hide();
+					clearTimeout(timer);
+				}, this.pendingRequest.get(reqKey));
+				return;
+			} else {
+				this.pendingRequest.set(reqKey, 2000);
+			}
 
 			return new Promise((resolve, reject) => {
 				Dio({
@@ -67,7 +88,15 @@ class Service {
 			});
 		};
 	}
-
+	/**
+	 * @description: 根据当前请求的信息，生成请求 Key
+	 * @param {*} config
+	 * @return {*}
+	 */
+	generateReqKey(config) {
+		const { method, url, params } = config;
+		return [method, url, QueryString.stringify(params)].join('&');
+	}
 	get = (url = '', params: any = {}, allData = false, loading = true) =>
 		this.dio('get', url, params, allData, loading);
 

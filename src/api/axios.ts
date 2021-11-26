@@ -3,10 +3,9 @@
  * @Author: Gleason
  * @Date: 2021-04-14 11:52:20
  * @LastEditors: Gleason
- * @LastEditTime: 2021-11-26 14:58:22
+ * @LastEditTime: 2021-11-26 17:33:29
  */
 import axios from 'axios';
-import QS from 'qs';
 
 const {
 	NODE_ENV, // 环境变量
@@ -62,51 +61,11 @@ const Dio: any = axios.create({
 	},
 });
 
-/**
- * @description: 根据当前请求的信息，生成请求 Key
- * @param {*} config
- * @return {*}
- */
-function generateReqKey(config) {
-	const { method, url, params, data } = config;
-	return [method, url, QS.stringify(params), QS.stringify(data)].join('&');
-}
-
-const pendingRequest = new Map();
-
-/**
- * @description: 当前请求信息添加到 pendingRequest 对象中
- * @param {*} config
- * @return {*}
- */
-function addPendingRequest(config) {
-	const requestKey = generateReqKey(config);
-	config.cancelToken =
-		config.cancelToken ||
-		new axios.CancelToken((cancel) => {
-			if (!pendingRequest.has(requestKey)) {
-				pendingRequest.set(requestKey, cancel);
-			}
-		});
-}
-function removePendingRequest(config) {
-	const requestKey = generateReqKey(config);
-	console.log('requestKey', requestKey);
-	if (pendingRequest.has(requestKey)) {
-		const cancelToken = pendingRequest.get(requestKey);
-		cancelToken(requestKey);
-		pendingRequest.delete(requestKey);
-	}
-}
 // 请求拦截
 Dio.interceptors.request.use(
 	(config: any) => {
-		console.log('请求拦截');
-		// 自定义 header，可添加项目 token
+		// 设置 token
 		config.headers.Authorization = sessionStorage.getItem('Authorization');
-		removePendingRequest(config); // 检查是否存在重复请求，若存在则取消已发的请求
-		addPendingRequest(config); // 把当前请求信息添加到pendingRequest对象中
-
 		return config;
 	},
 	(error: any) => {
@@ -118,18 +77,9 @@ Dio.interceptors.request.use(
 Dio.interceptors.response.use(
 	(response: any) => {
 		sessionStorage.setItem('Authorization', response.headers.Authorization);
-		removePendingRequest(response.config); // 从pendingRequest对象中移除请求
 		return response;
 	},
-	(error: any) => {
-		removePendingRequest(error.config || {}); // 从pendingRequest对象中移除请求
-		if (axios.isCancel(error)) {
-			console.warn(`已取消的重复请求：${error.message}`);
-		} else {
-			// 添加异常处理
-		}
-		return Promise.reject(error);
-	},
+	(error: any) => Promise.reject(error),
 );
 
 export default Dio;
