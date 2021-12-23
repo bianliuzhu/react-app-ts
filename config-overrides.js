@@ -1,11 +1,12 @@
 /*
  * @Author: Gleason
  * @Date: 2021-09-24 11:32:44
- * @LastEditTime: 2021-11-17 09:47:23
- * @Description: webpack 配置(覆盖)
+ * @LastEditTime: 2021-12-23 19:09:24
+ * @Description: webpack 配置(覆盖) 此文件已经弃用
  */
 
 const path = require('path');
+const glob = require('glob');
 const {
 	override, // 覆盖函数
 	addWebpackAlias, // 别名配置
@@ -15,18 +16,28 @@ const {
 	addPostcssPlugins, // 转换单位
 } = require('customize-cra');
 
+
 // mock 插件
 const MockjsWebpackPlugin = require('mockplugin');
+// 擦除无用 css
+const PurgecssPlugin = require('purgecss-webpack-plugin');
 
 const {
+	NODE_ENV,
+	REACT_APP_ENV, // 环境标识
+	REACT_APP_MOCK_PORT, // mock服务 端口号
+	REACT_APP_MOCK_DATA_FOLDER, // mock 数据文件夹
 	REACT_APP_HOST_DEVICE, // 设备
 	REACT_APP_HOST_SERVICE, // 服务
 	REACT_APP_HOST_ORDER, // 订单
 	REACT_APP_HOST_WORKER, // 工作台
-	REACT_APP_ENV, // 环境标识
-	REACT_APP_MOCK_PORT, // mock服务 端口号
-	REACT_APP_MOCK_DATA_FOLDER, // mock 数据文件夹
 } = process.env;
+
+// 是否为生产模式
+const IS_PROD = NODE_ENV === 'production';
+// 是否为 mock 环境
+const IS_MOCK = REACT_APP_ENV === 'mock';
+
 
 /**
  * @description: 路径 处理
@@ -42,12 +53,20 @@ const pathResolve = (pathUrl) => path.join(__dirname, pathUrl);
  */
 const PluginHandle = () => {
 	// mock 环境下挂在 MockjsWebpackPlugin
-	if (REACT_APP_ENV === 'mock') {
+	if (IS_MOCK) {
 		return new MockjsWebpackPlugin({
 			path: path.join(__dirname, REACT_APP_MOCK_DATA_FOLDER),
 			port: Number(REACT_APP_MOCK_PORT),
 		});
 	}
+
+	if (IS_PROD) {
+		console.log(11111111)
+		new PurgecssPlugin({
+			paths: glob.sync(`./src/**/*.tsx`, { nodir: true }),
+		})
+	}
+
 	return () => { };
 };
 

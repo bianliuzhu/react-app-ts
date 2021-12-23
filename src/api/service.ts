@@ -3,11 +3,11 @@
  * @Author: Gleason
  * @Date: 2021-04-13 16:56:39
  * @LastEditors: Gleason
- * @LastEditTime: 2021-11-26 17:59:19
+ * @LastEditTime: 2021-12-23 16:13:09
  */
 import Dio from './axios';
 import QueryString from 'qs';
-import { Toast } from 'antd-mobile';
+// import { Toast } from 'antd-mobile';
 import CodeHandle from './code';
 
 // 响应数据结构
@@ -44,7 +44,7 @@ class Service {
 		) => {
 			const situation = ['put', 'post', 'patch', 'delete'];
 			// 打开 loading
-			if (loading) Toast.loading('Loading...', 0);
+			if (loading) console.log('loading...'); // Toast.loading('Loading...', 0);
 
 			// 记录当前 请求key
 			const reqKey = this.generateReqKey({
@@ -57,7 +57,7 @@ class Service {
 			if (this.pendingRequest.has(reqKey)) {
 				const timer = setTimeout(() => {
 					this.pendingRequest.delete(reqKey);
-					Toast.hide();
+					// Toast.hide();
 					clearTimeout(timer);
 				}, this.pendingRequest.get(reqKey));
 				return;
@@ -76,14 +76,14 @@ class Service {
 					...config,
 				})
 					.then((res: Resonse) => {
-						Toast.hide();
+						// Toast.hide();
 						if (!res) return;
 						CodeHandle(res.data);
 						resolve(allData ? res : res.data.data);
 					})
 					.catch((err: any) => {
 						reject(err);
-						Toast.hide();
+						// Toast.hide();
 					});
 			});
 		};
