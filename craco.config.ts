@@ -128,10 +128,13 @@ module.exports = {
 			mode: 'extends' /* 默认值 */ || 'file',
 			plugins: [
 				PxToRem({
-					rootValue: 75,
+					rootValue: 37.5, // 换算基数，
 					propList: ['*'],
 					minPixelValue: 2,
-					selectorBlackList: ['am-'],
+					selectorBlackList: ['am-'], // 要忽略并保留为px的选择器，本项目我是用的vant ui框架，所以忽略他
+					unitPrecision: 3, // 允许REM单位增长到的十进制数字,小数点后保留的位数。
+					exclude: /(node_module)/, // 默认false，可以（reg）利用正则表达式排除某些文件夹的方法，例如/(node_module)/ 。如果想把前端UI框架内的px也转换成rem，请把此属性设为默认值
+					mediaQuery: false, // （布尔值）允许在媒体查询中转换px。
 				}),
 			], // 数组中提供的附加插件附加到现有配置中。
 			env: {
