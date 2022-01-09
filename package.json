@@ -54,7 +54,7 @@
 	"husky": {
 		"hooks": {
 			"pre-commit": "f2elint commit-file-scan",
-			"commit-msg": "f2elint commit-msg-scan"
+			"commit-msg": "commitlint -e $HUSKY_GIT_PARAMS"
 		}
 	},
 	"lint-staged": {
