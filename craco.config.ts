@@ -1,14 +1,16 @@
 import path from 'path';
-// const glob = require('glob');
+
+import { whenDev } from '@craco/craco';
 
 // mock 插件
 import MockjsWebpackPlugin from 'mockplugin';
 // px 单位转换成 rem
 import PxToRem from 'postcss-pxtorem';
 // less loader
-import CracoLessPlugin from 'craco-less';
+import CracoLess from 'craco-less';
+// import webpack from 'webpack';
+// const glob = require('glob');
 
-// import CracoAntDesignPlugin from 'craco-antd';
 const {
 	// NODE_ENV,
 	REACT_APP_ENV, // 环境标识
@@ -23,7 +25,14 @@ const {
 const pathResolve = (pathUrl) => path.join(__dirname, pathUrl);
 
 module.exports = {
-	plugins: [{ plugin: CracoLessPlugin }],
+	plugins: [
+		{
+			plugin: CracoLess,
+			options: {
+				noIeCompat: true,
+			},
+		},
+	],
 	webpack: {
 		alias: {
 			'@': pathResolve('./src'),
@@ -35,10 +44,15 @@ module.exports = {
 			routes: pathResolve('./src/router'),
 		},
 		plugins: [
-			new MockjsWebpackPlugin({
-				path: path.join(__dirname, REACT_APP_MOCK_DATA_FOLDER),
-				port: Number(REACT_APP_MOCK_PORT),
-			}),
+			...whenDev(
+				() => [
+					new MockjsWebpackPlugin({
+						path: path.join(__dirname, REACT_APP_MOCK_DATA_FOLDER),
+						port: Number(REACT_APP_MOCK_PORT),
+					}),
+				],
+				[],
+			),
 		],
 	},
 	babel: {
@@ -128,7 +142,7 @@ module.exports = {
 			mode: 'extends' /* 默认值 */ || 'file',
 			plugins: [
 				PxToRem({
-					rootValue: 37.5, // 换算基数，
+					rootValue: 100, // 换算基数，
 					propList: ['*'],
 					minPixelValue: 2,
 					selectorBlackList: ['am-'], // 要忽略并保留为px的选择器，本项目我是用的vant ui框架，所以忽略他
@@ -139,6 +153,10 @@ module.exports = {
 			], // 数组中提供的附加插件附加到现有配置中。
 			env: {
 				autoprefixer: {
+					cascade: true,
+					features: {
+						'nesting-rules': true,
+					},
 					/* 任何自动引用器选项: https://github.com/postcss/autoprefixer#options */
 				},
 				stage: 3 /* 任何有效 stages: https://cssdb.org/#staging-process. */,
