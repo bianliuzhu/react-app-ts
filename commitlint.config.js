@@ -1,12 +1,12 @@
 /*
- * @Description:
+ * @Description: commit 配置
  * @Author: Gleason
  * @Date: 2021-11-16 21:08:59
  * @LastEditors: Gleason
- * @LastEditTime: 2022-01-09 15:40:13
+ * @LastEditTime: 2022-01-09 15:49:40
  */
 module.exports = {
-	extends: ['@commitlint/config-conventional'],
+	extends: ['ali'],
 	rules: {
 		'type-enum': [2, 'always', [
 			'build', // 主要目的是修改项目构建系统(例如 glup，webpack，rollup 的配置等)的提交
