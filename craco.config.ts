@@ -3,7 +3,7 @@ import path from 'path';
 import { whenDev } from '@craco/craco';
 
 // mock 插件
-import MockjsWebpackPlugin from 'mockplugin';
+import MockjsWebpackPlugin from 'mock-service-plugin';
 // px 单位转换成 rem
 import PxToRem from 'postcss-pxtorem';
 // less loader
@@ -47,7 +47,7 @@ module.exports = {
 			...whenDev(
 				() => [
 					new MockjsWebpackPlugin({
-						path: path.join(__dirname, REACT_APP_MOCK_DATA_FOLDER),
+						path: path.join(__dirname, REACT_APP_MOCK_DATA_FOLDER as string),
 						port: Number(REACT_APP_MOCK_PORT),
 					}),
 				],

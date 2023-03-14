@@ -1,3 +1,10 @@
+/*
+ * @Description:
+ * @Author: Gleason
+ * @Date: 2021-11-18 21:09:14
+ * @LastEditors: Gleason
+ * @LastEditTime: 2022-02-11 23:41:14
+ */
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
@@ -10,7 +17,7 @@ const DevicePage = () => {
 	const [msg, setMsg] = useState<any>();
 
 	const getDataHandle = async () => {
-		const res = await vote();
+		const res = await vote({});
 		setMsg(res);
 	};
 

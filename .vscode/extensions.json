@@ -1,7 +1,23 @@
 {
-  "recommendations": [
-    "dbaeumer.vscode-eslint",
-    "stylelint.vscode-stylelint",
-    "esbenp.prettier-vscode"
-  ]
+	"recommendations": [
+		"formulahendry.auto-rename-tag",
+		"editorconfig.editorconfig",
+		"dbaeumer.vscode-eslint",
+		"eamodio.gitlens",
+		"shardulm94.trailing-spaces",
+		"vscode-icons-team.vscode-icons",
+		"streetsidesoftware.code-spell-checker",
+		"steoates.autoimport",
+		"bracketpaircolordlw.bracket-pair-color-dlw",
+		"dzhavat.bracket-pair-toggler",
+		"irongeek.vscode-env",
+		"spywhere.guides",
+		"vincaslt.highlight-matching-tag",
+		"kisstkondoros.vscode-gutter-preview",
+		"wix.vscode-import-cost",
+		"oderwat.indent-rainbow",
+		"christian-kohler.path-intellisense",
+		"esbenp.prettier-vscode",
+		"jasonnutter.search-node-modules"
+	]
 }

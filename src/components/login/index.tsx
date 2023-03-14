@@ -3,9 +3,10 @@
  * @Author: Gleason
  * @Date: 2021-11-01 14:06:28
  * @LastEditors: Gleason
- * @LastEditTime: 2021-12-23 15:10:17
+ * @LastEditTime: 2022-05-18 00:50:44
  */
 import { useHistory } from 'react-router-dom';
+
 import './index.less';
 
 const LoginPage = () => {
@@ -16,7 +17,7 @@ const LoginPage = () => {
 	};
 	return (
 		<div className="login_container">
-			<button onClick={loginHandle}>点击</button>
+			<button onClick={loginHandle}>登录 </button>
 		</div>
 	);
 };
